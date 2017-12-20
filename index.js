@@ -9,10 +9,6 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  axios.get('http://schumacher.football/api/championship/')
-  .then(response => {
-    socket.emit('update', response.data)
-  })
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
