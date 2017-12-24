@@ -16,6 +16,10 @@ io.on('connection', function(socket){
   socket.on('chat message', function(msg){
 	console.log('message:' + msg);
   });
+  socket.on('message', function(msg){
+    console.log(msg);
+    io.emit('message', msg);
+  });
   setInterval(function() {
     if (io.engine.clientsCount > 0) {
       axios.get('http://schumacher.football/api/championship/')
