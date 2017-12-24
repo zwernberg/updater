@@ -3,12 +3,13 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const axios = require('axios');
 
-
+var messages = [];
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', function(socket){
+  socket.emit('start_messages', messages)
   console.log('user connected');
   socket.on('disconnect', function(){
     console.log('user disconnected');
@@ -18,6 +19,7 @@ io.on('connection', function(socket){
   });
   socket.on('message', function(msg){
     console.log(msg);
+    messages.unshift(msg);
     io.emit('message', msg);
   });
   setInterval(function() {
