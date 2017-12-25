@@ -23,10 +23,13 @@ io.on('connection', function(socket){
       'name': msg.name,
       'message': msg.msg
     }
-    axios.post('http://schumacher.football/api/messages', params = data)
-      .then(response => {
-        socket.emit('message', response.data);
-      })
+    axios.post('http://schumacher.football/api/messages', {
+      name: msg.name,
+      message: msg.msg
+    })
+    .then(response => {
+      socket.emit('message', response.data);
+    })
   });
   setInterval(function() {
     if (io.engine.clientsCount > 0) {
