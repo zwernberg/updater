@@ -19,9 +19,10 @@ io.on('connection', function(socket){
   });
   socket.on('message', function(msg){
     console.log(msg);
-    //messages.unshift(msg);
-    io.emit('message', msg);
-    axios.post('http://schumacher.football/api/messages', params = msg);
+    axios.post('http://schumacher.football/api/messages', params = msg)
+      .then(response => {
+        socket.emit('message', response.data);
+      })
   });
   setInterval(function() {
     if (io.engine.clientsCount > 0) {
