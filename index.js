@@ -9,7 +9,7 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  socket.emit('start_messages', messages)
+  // socket.emit('start_messages', messages)
   console.log('user connected');
   socket.on('disconnect', function(){
     console.log('user disconnected');
@@ -19,8 +19,9 @@ io.on('connection', function(socket){
   });
   socket.on('message', function(msg){
     console.log(msg);
-    messages.unshift(msg);
+    //messages.unshift(msg);
     io.emit('message', msg);
+    axios.post('http://schumacher.football/api/messages', params = msg);
   });
   setInterval(function() {
     if (io.engine.clientsCount > 0) {
