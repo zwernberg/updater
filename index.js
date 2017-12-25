@@ -19,13 +19,9 @@ io.on('connection', function(socket){
   });
   socket.on('message', function(msg){
     console.log(msg);
-    var data = {
-      'name': msg.name,
-      'message': msg.msg
-    }
     axios.post('http://schumacher.football/api/messages/', {
       name: msg.name,
-      message: msg.msg
+      message: msg.message
     })
     .then(response => {
       socket.emit('message', response.data);
