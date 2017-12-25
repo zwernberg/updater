@@ -23,7 +23,7 @@ io.on('connection', function(socket){
       'name': msg.name,
       'message': msg.msg
     }
-    axios.post('http://schumacher.football/api/messages', {
+    axios.post('http://schumacher.football/api/messages/', {
       name: msg.name,
       message: msg.msg
     })
